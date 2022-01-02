@@ -3,4 +3,4 @@ I'm not satisfied with the way Shields have been implemented in Terraria. Their 
 
 The goal of this mod is to expand upon the usage of Shields. To give them greater purpose than just for more armor and a parry ability that can only be used with a specific weapon.
 
-But, for now, only the bare-bones ability to Block has been added. It doubles your Defense, slows you down and prevents the usage of items. Toggle it with the mod's hotkey.
+But, for now, only the bare-bones ability to Block has been added. It triples your Defense, slows you down and prevents the usage of items. Hold the mod's hotkey down to activate it.
