@@ -9,4 +9,4 @@ As of now, this mod adds 2 features: Blocking and Parrying.
 Hold the Hotkey to Block. During this action, the player gains a boost in Defense, but items cannot be used, and they are slowed down.
 
 ## Parrying
-When blocking, there is an incredibly short time frame to initiate a Parry. Come in contact with damage caused by enemies or projectiles, and all but 1 point of damage will be nullified.
+When blocking, there is an incredibly short time frame to initiate a Parry. Come in contact with damage caused by enemies or projectiles, and all but 1 point of damage will be nullified. Additionally, the attacker will be damaged. This damage scales with their Max HP, so Parrying is quite useful if in a conflict with strong enemies.
