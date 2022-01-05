@@ -5,8 +5,8 @@ The goal of this mod is to expand upon the usage of Shields. To give them greate
 
 As of now, this mod adds 2 features: Blocking and Parrying.
 
-##Blocking
+## Blocking
 Hold the Hotkey to Block. During this action, the player gains a boost in Defense, but items cannot be used, and they are slowed down.
 
-##Parrying
+## Parrying
 When blocking, there is a 5-tick time frame to initiate a Parry. Come in contact with damage caused by enemies or projectiles, and all but 1 point of damage will be nullified.
