@@ -1,16 +1,24 @@
 # Blocking
-I'm not satisfied with the way Shields have been implemented in Terraria. Their main use is extra Defense and added resistance to certain Debuffs. The Brand of The Inferno was an excellent idea, but its mechanic is solely attached to that weapon alone.
 
-The goal of this mod is to expand upon the usage of Shields. To give them greater purpose than just for more armor and a parry ability that can only be used with a specific weapon.
+I'm not satisfied with the way Shields have been implemented in Terraria. Their main use is extra Defense and added resistance to certain Debuffs. Items like the Brand of The Inferno were a step in the right direction, but their mechanics are solely attached to those weapons alone.
 
-As of now, this mod adds 2 features: Blocking and Parrying.
+So I made this. The main purpose is to not only provide a little more variety to Combat, but to also expand upon the usage of Shields.
 
-## Blocking
 
-Hold the Keybind to Block. During this action, the Player gains a boost in Endurance (+50%), but items cannot be used, and they are slowed down.
+As of now, this mod has 3 features: Guarding, Parrying and Shield Rework.
 
-If a Shield is equipped while Blocking, the Player is granted Shield Benefits. For now, these encompass additional Endurance (+35%). When the Player is struck during a Shield Block, a certain amount of Mana is consumed. This scales with their Max Mana. Once it is too low to be consumed, Shield Benefits are forfeit.
+## Guarding
+-Hold the Keybind to Guard. During this action, the Player gains a boost in Endurance (+50%), but items cannot be used, and they are slowed down.
+-Wearing Boots reduces the Movement Penalty of Guarding.
+-Wearing Gloves slightly increases the Endurance boost (+10%) while Guarding.
 
 ## Parrying
+-When Guarding, there is a half-second time frame to initiate a Parry.
+-Performing a Parry on NPCs and Projectiles will nullify damage.
+-Additionally, the Player is granted the Striking Moment buff for a brief time, allowing their next Melee Strike to deal +400% damage.
+-Wearing Gloves slightly increases this time.
 
-When blocking, there is a half-second time frame to initiate a Parry. Come in contact with damage caused by enemies or projectiles, and all but 1 point of damage will be nullified. Additionally, the attacker will be damaged. This damage scales with their Max HP, so Parrying is quite useful if in a conflict with enemies stronger than you.
+## Shield Rework
+-For every point of Defense a shield grants, the Player is bestowed 10 extra Max Life.
+-If a Shield is equipped while Guarding, the Player is granted Shield Benefits. During this action, damage received will be completely nullified at the cost of Mana Consumption.
+-This scales with the Player's Defense, so increasing it proves beneficial. Once it is too low to be consumed, or the attack is higher than what their current Mana can handle, damage is no longer nullified, but the Endurance boost from Shield Benefits (+25%) remains.
