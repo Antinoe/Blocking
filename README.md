@@ -5,14 +5,16 @@ I'm not satisfied with the way Shields have been implemented in Terraria. Their 
 So I made this. The main purpose is to not only provide a little more variety to Combat, but to also expand upon the usage of Shields.
 
 
-As of now, this mod has 3 features: Guarding, Parrying and Shield Rework.
+Below are the features:
 
 ## Guarding
+
 -Hold the Keybind to Guard. During this action, the Player gains a boost in Endurance (+50%), but items cannot be used, and they are slowed down.
 -Wearing Boots reduces the Movement Penalty of Guarding.
 -Wearing Gloves slightly increases the Endurance boost (+10%) while Guarding.
 
 ## Parrying
+
 -When Guarding, there is a half-second time frame to initiate a Parry.
 -Performing a Parry on NPCs and Projectiles will nullify damage.
 -Additionally, the Player is granted the Striking Moment buff for a brief time, allowing their next Melee Strike to deal +400% damage.
