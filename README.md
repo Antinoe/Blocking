@@ -9,9 +9,9 @@ Below are the features:
 
 ## Guarding
 
-```-Hold the Keybind to Guard. During this action, the Player gains a boost in Endurance (+50%), but items cannot be used, and they are slowed down.```
-```-Wearing Boots reduces the Movement Penalty of Guarding.```
-```-Wearing Gloves slightly increases the Endurance boost (+10%) while Guarding.```
+-Hold the Keybind to Guard. During this action, the Player gains a boost in Endurance (+50%), but items cannot be used, and they are slowed down.
+-Wearing Boots reduces the Movement Penalty of Guarding.
+-Wearing Gloves slightly increases the Endurance boost (+10%) while Guarding.
 
 ## Parrying
 
