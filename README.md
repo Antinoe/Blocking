@@ -12,7 +12,7 @@ Below are the features (EVERYTHING IS CONFIGURABLE):
 #### -Hold the Keybind to Guard. During this action, the Player gains a boost in Endurance, but items cannot be used, and they are slowed down.
 #### -Wearing Boots reduces the Movement Penalty of Guarding.
 #### -Wearing Gloves slightly increases the Endurance boost while Guarding.
-#### -Press the respective Keybind while Guarding to perform a Guard Bash. (Experimental feature. Unfinished as of now.)
+#### -Press the respective Keybind while Guarding to perform a Guard Bash. Doing so will knock enemies back and deal Thorns damage to them.
 
 ## __Parrying__
 
