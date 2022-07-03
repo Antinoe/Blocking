@@ -1,0 +1,179 @@
+
+
+-v0.1-
+-Initial build.
+-For now, only the bare-bones ability to Block has been added. It doubles your Defense, slows you down and prevents the usage of items. Toggle it with the mod's hotkey.
+
+-v0.2-
+-The key now must be held down to continue blocking.
+-Added an animation for blocking.
+-Until I find out how to check for equipped Shields, the player's Defense will be tripled whenever blocking.
+
+-v0.3-
+-Added a Parry function. Time your Shield Raise just right, and enemies will be harmed upon contact.
+-Added raise and lower sounds for Blocking.
+-Changed the [block] bool to [blocking].
+
+-v0.4-
+-Added a Parry sound.
+
+-v0.5-
+-During a Parry, the player is granted 100% Endurance, nullifying all but 1 point of damage.
+-When Blocking, instead of the player's Defense being x3, it is now x2.
+-When Blocking, the player is bestowed with +7 Defense.
+-Added a Homepage.
+
+-v0.6-
+-Changed the Parry's Endurance from 100% to 999%, as 100% wasn't actually enough for all damage ranges.
+-Increased the Parry Timer from 5 to 7.
+
+-v0.7-
+-Increased the Parry Timer from 7 to 10.
+
+-v0.8-
+-Updated the mod to tModLoader 1.4.
+-Removed unnecessary content.
+
+-v0.9-
+-Added an animation for when the parryTimer runs dry: Arms are a little more spread out during a Parry, but turn inward in a more "guarding" position when the chance to perform one has passed.
+-The defensive benefits of Blocking are now boosted in Expert Mode and Master Mode to compensate for the increased damage that enemies deal.
+-Updated the Mod Icon.
+-Fixed the "Parry Spam" exploit.
+
+-v1.0-
+-Adjusted the Expert Mode and Master Mode defense boosts. I mistakenly had the Test world on Hardmode. Because of this, my calculations were far off.
+-Any item that is equipped as a Shield is now properly detected. (Thank you, GabeHasWon, Creedus, Aang, direwolf420 and screen shdaers.)
+-Added a Shield Block sound.
+-If a Shield is equipped, as long as your Mana is greater than or equal to a fifth of its max, you will be granted Shield Benefits (I plan to give this greater purpose than just more Defense). When taking damage during a Shield Block, a fifth of your Max Mana is consumed. If no more can be used, then the Shield Benefits will be revoked.
+
+-v1.1-
+__Gameplay Changes__
+-Shield Blocking consumes a fourth of your Mana now, not fifth.
+-Shield Blocking now multiplies your Defense by 3, not 2.
+-Parrying and Shield Blocking now grant Long Invincibility. Because the ``Player.longInvince`` boolean is dynamic, this scales with the amount of damage you receive. For example, Parrying will grant normal Immunity Time, whereas Shield Blocking (if the damage is greater than 1) will grant longer Immunity Time.
+-Blocking no longer provides Knockback Immunity. You will need to initiate a Parry for this.
+__Visual/Audio Changes__
+-Made the (old1) Parry sound the default Block sound effect.
+__Bug Fixes__
+-The Shield Block sound effect no longer plays when Shield Benefits are inactive.
+__Miscellaneous__
+-Updated the Description.
+-Changed the default Keybind from "G" to "LeftAlt".
+
+-v1.1.1-
+-Updated the Description. There was a small mistake in language that potentially led to misunderstanding.
+
+-v1.2-
+-Improved the formula used to calculate Mana Consumption from Shield Blocking. The Player is now rewarded for having higher Max Mana.
+-Updated the Mod Icon.
+
+-v1.3-
+__Gameplay Changes__
+-Endurance Rework: Instead of operating under Defense Multiplication, the Endurance attribute is utilized.
+-Blocking grants +50% Endurance. Shield Blocking grants an additional +35%, reducing Damage by 85%, but not entirely nullifying it down to 1. Let's hope this solves some of the Balance issues of this mod.
+-Removed the Long Invincibility effect from Shield Benefits.
+__Visual/Audio Changes__
+-Shields now have a custom Tooltip to show that they are affected by this mod.
+__Miscellaneous__
+-Moved the contents of the Credits file to the Description, where it should have been.
+-Renamed the ``hasShieldActive`` boolean to ``hasShieldBenefits``.
+-Removed the checks for Expert Mode and Master Mode, as they are unneeded for the Endurance method.
+-Added the ``blockingTimer`` and ``blockingPotency`` integers. These will be used to calculate certain actions while Blocking.
+-The ``hasGlove`` and ``hasBoot`` booleans have been added. These will play a role in the next update.
+
+-v1.4-
+__Gameplay Changes__
+-Shields now offer Passive Protection: Each point of Defense that one grants is converted into 10 Max Life.
+-Gloves now grant a slight boost in Endurance while Blocking.
+-Boots now reduce the Movement penalty of Blocking.
+__Miscellaneous__
+-Changed the Global Shield tooltip.
+-Added Global tooltips for Gloves and Boots.
+-The method of detecting Shields, Gloves and Boots is now more optimized. (Thanks, Exterminator and direwolf420.)
+
+-v1.5-
+__Gameplay Changes__
+-Immunity Rework: Parrying and Shield Benefits now absorb all damage.
+-Shield Blocking Mana Consumption now scales with damage received. Bearing higher Defense also influences this.
+-Shield Blocking now grants +25% damage reduction, not +35%.
+-Parrying no longer damages enemies.
+-Parrying now grants the Striking Moment buff for a brief time.
+-Glove Benefits now slightly increase the Striking Moment buff granted from Parrying.
+-Implemented a better method of detecting contact damage. (Thank you, Nakano.)
+__Miscellaneous__
+-Updated the Global Shield tooltip to align with the new rework.
+-Added a Broken Shield sound (for when Shield Blocking, but Shield Benefits are not active.)
+-Updated the description.
+-Segregated the Changelog into a file of its own, since I discovered just now that there is a character limit for uploading.
+-Changed the title to Blocking "(Guarding, Parrying and Improved Shields)".
+-Changed the term of "Blocking" to "Guarding".
+
+-v1.5.1-
+-Rebalanced Shield Blocking Mana Consumption. (Was 2. Is now 1.025.)
+
+-v1.5.2-
+-Introduced a different formula for Shield Blocking Mana Consumption. Every 1 Defense reduces 1 Mana Consumption from Shield Blocking.
+-Updated the Description.
+
+-v1.5.3-
+-Tweaked the Shield Blocking Mana Consumption formula yet again.. It is now simply this: Damage - Defense.
+
+-v1.6-
+-Added Guard Bashing. (Experimental. Does nothing at the moment.)
+-Changed all of the internal names of "Block" to "Guard".
+-Removed the "blockingTimer" and "blockingPotency" integers, as they have been unused.
+-Added a Config. Nearly everything can now be changed.
+-Glove Benefits no longer grant extended Parry Time.
+-Optimized the code a bit.
+
+-v1.6.1-
+-Edited some of the Config options for better clarification.
+-Decreased the default Parry Counter Time from 60 to 40.
+-Increased the default Blocking Potency from 0.5 to 0.6.
+
+-v1.6.2-
+__Gameplay__
+-Glove Benefits now increase Parry Time. (configurable.)
+-Added Shield Weight. If enabled, equipped shields slow the Player down. Disabled by default. (EXPERIMENTAL. USE AT OWN RISK.)
+__Miscellaneous__
+-Edited some of the Global Tooltips.
+__Config Changes__
+-Parrying, Glove Benefits, Boot Benefits and Shield Benefits can now be toggled on/off in the config.
+-Increased the default value of Guard Bashing Cooldown from 30 to 35.
+-Decreased the default value of Glove Benefits Blocking Potency from 0.10 to 0.05.
+-Decreased the default value of Boot Benefits Movement Boost from 0.75 to 0.35.
+
+-v1.6.3-
+__Bug Fixes__
+-Fixed a critical bug with Shield Weight. It doesn't work, so it is now completely disabled. It may be re-instated in a future version.
+__Config__
+-Increased the default value of Shield Life from 10 to 25.
+
+-v1.6.4-
+-When receiving damage, the Player Hurt sound no longer plays while Guarding or Shield Guarding.
+-Guarding and Guard Bashing can now be turned off in the config.
+-Guard Bashing is now a functional mechanic.
+-Increased the default value of Guard Bashing Cooldown from 35 to 40.
+
+-v1.6.4.1-
+-Fixed a critical bug: Whenever Guarding from damage, the Player's Life would be reduced and they wouldn't die, even if it went past 0.
+
+-v1.6.5-
+-Cleaned up the code.
+-Added a Keybind to toggle Potent Guarding on/off.
+-Re-structured the config.
+-Changed Mod Title from "Blocking (Guarding, Parrying and Improved Shields)" to "Blocking (Guarding, Parrying and Reworked Shields)".
+
+-v1.6.5.1-
+-Implemented a more proper form of modifying the Player's Movement Speed. (Thanks, Alceris.)
+-Made Guard Bashing off by default, as the mechanic needs fleshed out more.
+
+-v1.6.5.2-
+-Movement Speed Hotfix: Movement-based items like the Hermes Boots or the Speedbooster from Metroid Mod can no longer activate when the Player has a low Guard Movement Speed. This bug occurred in the former update because Player Velocity on the X Axis had no change applied when Guarding.
+
+-v1.6.5.3-
+-Added Guard, Parry and Parry Counter cooldowns. These timers will be expanded upon in the future.
+-Updated the Mod Icon.
+
+-v1.6.5.4-
+-Updated the mod for the June update of tModLoader.
