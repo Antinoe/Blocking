@@ -12,6 +12,9 @@ using Terraria.ModLoader.IO;
 using Terraria.Utilities;
 using Terraria.Localization;
 using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
+using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 //using System.Reflection; //This is what allows EquipType to be referenced. But that's unneeded in this context, so I won't allow it to exist here.
@@ -74,6 +77,12 @@ namespace Blocking
 			if (!modPlayer.hasBoot)
 			{
 				modPlayer.hasBoot = Item.shoeSlot > -1;
+			}
+			
+			//Special Accessory
+			if (BlockingConfig.Instance.ItemWhitelist.Contains(new ItemDefinition(Item.type)))
+			{
+				//Item.defense = 2;
 			}
 
 			//Shield Life

@@ -5,22 +5,22 @@ So I made this. The main purpose is to not only provide a little more variety to
 **Below are the features (EVERYTHING IS CONFIGURABLE):**
 
 __Guarding__
-
 -Hold the Keybind to Guard. During this action, the Player gains a boost in Endurance, but items cannot be used, and they are slowed down.
 -Wearing Boots reduces the Movement Penalty of Guarding.
 -Wearing Gloves slightly increases the Endurance boost while Guarding.
 -Press the respective Keybind while Guarding to perform a Guard Bash. Doing so will knock enemies back and deal Thorns damage to them.
+-NPCs can also have a chance of Guarding if added to the Whitelist provided in the Config.
 
 __Parrying__
-
--When Guarding, there is a small time frame to initiate a Parry.
--Performing a Parry on NPCs and Projectiles will nullify damage.
+-Press the respective Keybind to Parry. Upon doing so, there is a small time frame to successfully avoid an attack.
+-Damage received while Parrying will completely nullify it.
 -Additionally, the Player is granted the Striking Moment buff for a brief time, allowing their next Melee strike to deal +400% damage.
+-NPCs can also have a chance of Parrying if added to the Whitelist provided in the Config.
 
 __Shield Rework__
-
 -For every 1 Defense a shield grants, the Player is bestowed extra Max Life.
 -Potent Guarding can be toggled. When it is active, damage is absorbed at the cost of consuming Mana. This scales with the Player's Defense, so increasing it proves beneficial.
+-NPCs can also have a chance of Shield Guarding if added to the Whitelist provided in the Config.
 
 
 -Credits-
@@ -32,46 +32,10 @@ __Shield Rework__
 -Re-Logic: New Mod Icon.
 -Nakano15: Helped me with the new features of v1.5.
 -Alceris: Showed me how to properly change the Player's Movement Speed.
+-Chaos Insurgent 49: When I was making Parrying its own Keybind, I had trouble getting it to work properly, and that was because it was all in PostUpdateMiscEffects, not ProcessTriggers. CI49 showed me that.
 
 
 -Changelog-
-
--v1.4-
-__Gameplay Changes__
--Shields now offer Passive Protection: Each point of Defense that one grants is converted into 10 Max Life.
--Gloves now grant a slight boost in Endurance while Blocking.
--Boots now reduce the Movement penalty of Blocking.
-__Miscellaneous__
--Changed the Global Shield tooltip.
--Added Global tooltips for Gloves and Boots.
--The method of detecting Shields, Gloves and Boots is now more optimized. (Thanks, Exterminator and direwolf420.)
-
--v1.5-
-__Gameplay Changes__
--Immunity Rework: Parrying and Shield Benefits now absorb all damage.
--Shield Blocking Mana Consumption now scales with damage received. Bearing higher Defense also influences this.
--Shield Blocking now grants +25% damage reduction, not +35%.
--Parrying no longer damages enemies.
--Parrying now grants the Striking Moment buff for a brief time.
--Glove Benefits now slightly increase the Striking Moment buff granted from Parrying.
--Implemented a better method of detecting contact damage. (Thank you, Nakano.)
-__Miscellaneous__
--Updated the Global Shield tooltip to align with the new rework.
--Added a Broken Shield sound (for when Shield Blocking, but Shield Benefits are not active.)
--Updated the description.
--Segregated the Changelog into a file of its own, since I discovered just now that there is a character limit for uploading.
--Changed the title to Blocking "(Guarding, Parrying and Improved Shields)".
--Changed the term of "Blocking" to "Guarding".
-
--v1.5.1-
--Rebalanced Shield Blocking Mana Consumption. (Was 2. Is now 1.025.)
-
--v1.5.2-
--Introduced a different formula for Shield Blocking Mana Consumption. Every 1 Defense reduces 1 Mana Consumption from Shield Blocking.
--Updated the Description.
-
--v1.5.3-
--Tweaked the Shield Blocking Mana Consumption formula yet again.. It is now simply this: Damage - Defense.
 
 -v1.6-
 -Added Guard Bashing. (Experimental. Does nothing at the moment.)
@@ -132,3 +96,17 @@ __Config__
 
 -v1.6.5.4-
 -Updated the mod for the June update of tModLoader.
+
+-v1.6.6-
+[=] Organized the BlockingPlayer class into multiple ``partial`` files.
+[=] Fixed the "Parrying doesn't nullify damage" bug.
+[+] Added Chat Tags to the Config.
+[=] Changed the Guarding and Parrying booleans to integers.
+[+] Made Parrying its own action and keybind.
+[+] Parrying now has its respective animation. (Thanks for the fix, CI49.)
+[+] Added some Lists to the Config that will have a use in the next update. (Parry Accessory Whitelist, Parry Projectile Blacklist.)
+[+] Added the (NPC Guard, NPC Parry, NPC Shield Guard) Lists to the Config. These allow Whitelisted NPCs to Guard, Parry and Shield Guard against damage. The chance of each happening can be individually configured.
+[=] Increased the default Parry Cooldown from 40 ticks to 80.
+[+] Added Screenshake to the various actions of this mod.
+[+] Added the option to disable Parry Counters.
+[+] Added Audio and Visual Clientside Configuration.

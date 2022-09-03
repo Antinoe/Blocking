@@ -11,12 +11,14 @@ namespace Blocking
 		public static ModKeybind Guard;
 		public static ModKeybind GuardBash;
 		public static ModKeybind TogglePotentGuard;
+		public static ModKeybind Parry;
 		
         public override void Load()
         {
             Guard = KeybindLoader.RegisterKeybind(this, "Guard", "LeftAlt");
             GuardBash = KeybindLoader.RegisterKeybind(this, "Guard Bash", "Mouse1");
             TogglePotentGuard = KeybindLoader.RegisterKeybind(this, "Toggle Potent Guarding", "Mouse3");
+            Parry = KeybindLoader.RegisterKeybind(this, "Parry", "LeftAlt");
         }
         
         public override void Unload()
@@ -24,6 +26,7 @@ namespace Blocking
             Guard = null;
             GuardBash = null;
 			TogglePotentGuard = null;
+            Parry = null;
         }
     }
 }

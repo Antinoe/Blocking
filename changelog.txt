@@ -177,3 +177,17 @@ __Config__
 
 -v1.6.5.4-
 -Updated the mod for the June update of tModLoader.
+
+-v1.6.6-
+[=] Organized the BlockingPlayer class into multiple ``partial`` files.
+[=] Fixed the "Parrying doesn't nullify damage" bug.
+[+] Added Chat Tags to the Config.
+[=] Changed the Guarding and Parrying booleans to integers.
+[+] Made Parrying its own action and keybind.
+[+] Parrying now has its respective animation. (Thanks for the fix, CI49.)
+[+] Added some Lists to the Config that will have a use in the next update. (Parry Accessory Whitelist, Parry Projectile Blacklist.)
+[+] Added the (NPC Guard, NPC Parry, NPC Shield Guard) Lists to the Config. These allow Whitelisted NPCs to Guard, Parry and Shield Guard against damage. The chance of each happening can be individually configured.
+[=] Increased the default Parry Cooldown from 40 ticks to 80.
+[+] Added Screenshake to the various actions of this mod.
+[+] Added the option to disable Parry Counters.
+[+] Added Audio and Visual Clientside Configuration.
