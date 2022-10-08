@@ -23,18 +23,18 @@ namespace Blocking
 		{
 			if (screenShakeTimerGuarding > 0)
 			{
-				Main.screenPosition.X += (float)Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountGuarding;
-				Main.screenPosition.Y += (float)Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountGuarding;
+				Main.screenPosition.X += (float)Math.Round(Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountGuarding);
+				Main.screenPosition.Y += (float)Math.Round(Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountGuarding);
 			}
 			if (screenShakeTimerParryingAttempt > 0)
 			{
-				Main.screenPosition.X += (float)Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParryingAttempt;
-				Main.screenPosition.Y += (float)Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParryingAttempt;
+				Main.screenPosition.X += (float)Math.Round(Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParryingAttempt);
+				Main.screenPosition.Y += (float)Math.Round(Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParryingAttempt);
 			}
 			if (screenShakeTimerParrying > 0)
 			{
-				Main.screenPosition.X += (float)Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParrying;
-				Main.screenPosition.Y += (float)Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParrying;
+				Main.screenPosition.X += (float)Math.Round(Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParrying);
+				Main.screenPosition.Y += (float)Math.Round(Main.rand.Next((int)(0f - 1), (int)1) * BlockingConfigClient.Instance.screenShakeAmountParrying);
 			}
 		}
 	}
