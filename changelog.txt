@@ -191,3 +191,11 @@ __Config__
 [+] Added Screenshake to the various actions of this mod.
 [+] Added the option to disable Parry Counters.
 [+] Added Audio and Visual Clientside Configuration.
+
+-v1.6.7-
+[=] Fixed the Screenshake effects.
+[=] Fixed the "continuous damage from Lava when Guarding" bug.
+[=] The Player Hurt sound no longer plays when receiving damage while Guarding.
+[=] Increased the maximum Parry Counter option from 120 to 360.
+[+] Added the "Toggle Parry Counter" keybind.
+[+] Added a few Terraria NPCs to the Parry and Shield-Guard lists in the Config to act as examples.

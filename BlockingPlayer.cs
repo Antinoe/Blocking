@@ -33,6 +33,7 @@ namespace Blocking
 		public int guardingCooldown = 0;
 		public int potentGuardingCooldown = 0;
 		public int parryCooldown = 0;
+		public bool parryCounter = true;
 		public int parryCounterCooldown = 0;
 		public int screenShakeTimerGuarding = 0;
 		public int screenShakeTimerParryingAttempt = 0;

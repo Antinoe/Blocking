@@ -92,6 +92,25 @@ namespace Blocking
 					}
 				}
 			}
+			if (Blocking.ToggleParryCounter.JustPressed)
+			{
+				if (!parryCounter)
+				{
+					parryCounter = true;
+					if (BlockingConfigClient.Instance.enableSoundsParrying)
+					{
+						SoundEngine.PlaySound(Parry, Player.position);
+					}
+				}
+				else
+				{
+					parryCounter = false;
+					if (BlockingConfigClient.Instance.enableSoundsParryingAttempt)
+					{
+						SoundEngine.PlaySound(ParryAttempt, Player.position);
+					}
+				}
+			}
 			if (BlockingConfig.Instance.enablePotentGuarding)
 			{
 				canPotentGuard = true;

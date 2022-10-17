@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using Terraria.ID;
 using Terraria.ModLoader.Config;
 
 namespace Blocking
@@ -34,7 +35,10 @@ namespace Blocking
 		
 		[Label("[i:GuideVoodooDoll][i:FeralClaws] NPC Parry Whitelist")]
 		[Tooltip("NPCs in this list have a chance of Parrying damage.")]
-		public List<NPCDefinition> NPCParryWhitelist = new List<NPCDefinition>();
+		public List<NPCDefinition> NPCParryWhitelist = new List<NPCDefinition>
+			{
+				new NPCDefinition(NPCID.BoneLee)
+			};
 		
         [Label("[i:FeralClaws] NPC Parry Chance")]
         [Tooltip("The chance Whitelisted NPCs will Parry incoming damage.\n[Default: 10]")]
@@ -46,7 +50,11 @@ namespace Blocking
 		
 		[Label("[i:GuideVoodooDoll][i:TitanGlove][i:CobaltShield] NPC Shield Guard Whitelist")]
 		[Tooltip("NPCs in this list have a chance of Shield Guarding against damage.")]
-		public List<NPCDefinition> NPCShieldGuardWhitelist = new List<NPCDefinition>();
+		public List<NPCDefinition> NPCShieldGuardWhitelist = new List<NPCDefinition>
+			{
+				new NPCDefinition(NPCID.DD2GoblinT2),
+				new NPCDefinition(NPCID.DD2GoblinT3)
+			};
 		
         [Label("[i:TitanGlove][i:CobaltShield] NPC Shield Guard Chance")]
         [Tooltip("The chance Whitelisted NPCs will Shield Guard against incoming damage.\n[Default: 2]")]
@@ -200,7 +208,7 @@ namespace Blocking
         [Tooltip("Time left to perform a Parry Counter.\n[Default: 40]")]
         [Slider]
         [DefaultValue(40)]
-        [Range(0, 120)]
+        [Range(0, 360)]
         [Increment(5)]
         public int parryCounterTime {get; set;}
 		
@@ -247,6 +255,5 @@ namespace Blocking
         [Range(0f, 2f)]
         [Increment(0.05f)]
         public float bootBenefitsMoveSpeed {get; set;}
-		
     }
 }
