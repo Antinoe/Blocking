@@ -39,15 +39,15 @@ namespace Blocking
 		public int screenShakeTimerParryingAttempt = 0;
 		public int screenShakeTimerParrying = 0;
 		
-		//Resetting the Booleans is important, as some of them may not reset by themselves.
+		//	Resetting the Booleans is important, as some of them may not reset by themselves.
 		public override void ResetEffects()
 		{
-			//guardTimer = 0; //Not resetting this anymore since the function stops working completely when doing so.
+			//guardTimer = 0; //	Not resetting this anymore since the function stops working completely when doing so.
 			hasShield = false;
 			hasGlove = false;
-			//hasGloveBenefits = false; //Resetting this nullifies the effect completely. :moyai:
+			//hasGloveBenefits = false; //	Resetting this nullifies the effect completely. :moyai:
 			hasBoot = false;
-			//hasBootBenefits = false; //Resetting this nullifies the effect completely. :moyai:
+			//hasBootBenefits = false; //	Resetting this nullifies the effect completely. :moyai:
 		}
 		
 		public static BlockingPlayer ModPlayer(Player Player)
@@ -55,15 +55,15 @@ namespace Blocking
 			return Player.GetModPlayer<BlockingPlayer>();
 		}
 		
-		public override void PostUpdateMiscEffects() //Core.
+		public override void PostUpdateMiscEffects()
 		{
-			//Guarding
+			//	Guarding
 			if (guardTimer > 0)
 			{
 				Player.endurance += BlockingConfig.Instance.blockingPotency;
 				Player.accRunSpeed *= BlockingConfig.Instance.guardingMoveSpeed;
 				Player.maxRunSpeed *= BlockingConfig.Instance.guardingMoveSpeed;
-				Player.velocity.X *= 0.95f; //This is here to prevent usage of Speed items like the Hermes Boots or the Speedbooster from Metroid Mod.
+				Player.velocity.X *= 0.95f; //	This is here to prevent usage of Speed items like the Hermes Boots or the Speedbooster from Metroid Mod.
 				Player.delayUseItem = true;
 			}
 			if (guardingCooldown > 0)
@@ -71,7 +71,7 @@ namespace Blocking
 				guardingCooldown--;
 			}
 			
-			//Parrying
+			//	Parrying
 			if (parryTimer > 0)
 			{
 				parryTimer--;
@@ -85,7 +85,7 @@ namespace Blocking
 				parryCounterCooldown--;
 			}
 			
-			//Guard Bashing
+			//	Guard Bashing
 			if (guardBashing)
 			{
 				Player.thorns = BlockingConfig.Instance.guardBashingPotency;
@@ -104,13 +104,13 @@ namespace Blocking
 				guardBashCooldown--;
 			}
 			
-			//Shield Equipped
+			//	Shield Equipped
 			if (guardTimer > 0 && hasShield)
 			{
 				Player.endurance += BlockingConfig.Instance.shieldBlockingPotency;
 			}
 			
-			//Glove Equipped
+			//	Glove Equipped
 			if (hasGlove && BlockingConfig.Instance.enableGloveBenefits)
 			{
 				hasGloveBenefits = true;
@@ -124,7 +124,7 @@ namespace Blocking
 				Player.endurance += BlockingConfig.Instance.gloveBenefitsBlockingPotency;
 			}
 			
-			//Boot Equipped
+			//	Boot Equipped
 			if (hasBoot && BlockingConfig.Instance.enableBootBenefits)
 			{
 				hasBootBenefits = true;
@@ -138,7 +138,7 @@ namespace Blocking
 				Player.moveSpeed += BlockingConfig.Instance.bootBenefitsMoveSpeed;
 			}
 			
-			//Screenshake
+			//	Screenshake
 			if (screenShakeTimerGuarding > 0)
 			{
 				screenShakeTimerGuarding--;
@@ -153,107 +153,86 @@ namespace Blocking
 			}
 		}
 		
-		//Right before receiving damage.
+		//	Right before receiving damage.
 		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {
+			//	Not sure what bug this fixed, but I'll leave it here anyway.
 			if (Player.immuneTime > 0)
 			{
 				return false;
 			}
 			else
 			{
-				if (parryTimer >= 1) //Parrying.
+				//	Parrying.
+				if (parryTimer > 0)
 				{
 					playSound = false;
-					if (BlockingConfigClient.Instance.enableSoundsParrying)
-					{
-						SoundEngine.PlaySound(Parry, Player.position);
-					}
-					if (BlockingConfigClient.Instance.enableScreenshakeParrying)
-					{
-						screenShakeTimerParrying += BlockingConfig.Instance.parryTimer;
-					}
-					Player.immune = true;
-					Player.immuneTime = BlockingConfig.Instance.parryImmuneTime; //Parry Immune Time is set to the configured value.
-					parryCooldown = BlockingConfig.Instance.parryCooldown;
-					if (parryCounterCooldown == 0 && BlockingConfig.Instance.enableParryCounters && parryCounter)
-					{
-						Player.AddBuff(BuffID.ParryDamageBuff, BlockingConfig.Instance.parryCounterTime); //Add the Striking Moment buff.
-						parryCounterCooldown = BlockingConfig.Instance.parryCounterCooldown;
-					}
-					return false; //The reason we put the return value here, at the end of the Parry Counter code, rather than at the end of the Parry code, is because nothing after a Return statement is run. Therefore, if we had done the aforementioned, the Parry Counter code wouldn't run at all, rendering the ability useless.
+					OnParry();
+					return false; //	The reason we put the return value here, at the end of the Parry Counter code, rather than at the end of the Parry code, is because nothing after a Return statement is run. Therefore, if we had done the aforementioned, the Parry Counter code wouldn't run at all, rendering the ability useless.
+					//	Remember: The placement of return values is very necessary. Always put it at the end of statements.
 				}
 				
-				if (guardTimer >= 1 && !hasShield && parryTimer == 0) //Guarding, but not Parrying and not Shield Guarding.
+				//	Guarding
+				if (guardTimer >= 1 && !hasShield && parryTimer == 0)
 				{
 					playSound = false;
-					//The 2 strings below are what cause the Player to be launched back upon Shield Guarding.
-					Player.velocity.X = 5f * hitDirection;
-					Player.velocity.Y = -3f;
-					if (BlockingConfigClient.Instance.enableSoundsGuardingBlock)
-					{
-						SoundEngine.PlaySound(Block, Player.position);
-					}
-					guardingCooldown = BlockingConfig.Instance.guardingCooldown;
+					//	Potent Guarding
 					if (potentGuarding && canPotentGuard && !BlockingConfig.Instance.potentGuardingRequiresShield && Player.statMana >= damage - Player.statDefense)
 					{
 						Player.statMana -= damage - Player.statDefense;
-						Player.immune = true;
-						Player.immuneTime = BlockingConfig.Instance.blockingImmuneTime;
+						Player.velocity.X = 5f * hitDirection;
+						Player.velocity.Y = -3f;
+						OnPotentBlock();
 						return false;
 					}
-					else //No Mana to consume.
+					//	No Mana left for Potent Guarding. Normal Guarding.
+					else
 					{
+						Player.velocity.X = 5f * hitDirection;
+						Player.velocity.Y = -3f;
+						OnBlock();
 						return true;
 					}
 				}
 				
-				if (guardTimer >= 1 && hasShield && parryTimer == 0) //Shield Guarding, but not Parrying.
+				//	Shield Guarding
+				if (guardTimer >= 1 && hasShield && parryTimer == 0)
 				{
 					playSound = false;
-					//The 2 strings below are what cause the Player to be launched back upon Shield Guarding.
-					Player.velocity.X = 5f * hitDirection;
-					Player.velocity.Y = -3f;
+					//	Potent Shield Guarding.
 					if (potentGuarding && canPotentGuard && Player.statMana >= damage - Player.statDefense)
 					{
+						Player.velocity.X = 5f * hitDirection;
+						Player.velocity.Y = -3f;
 						Player.statMana -= damage - Player.statDefense;
-					if (BlockingConfigClient.Instance.enableSoundsGuardingBlockShield)
-					{
-						SoundEngine.PlaySound(BlockShield, Player.position);
-					}
-						Player.immune = true;
-						Player.immuneTime = BlockingConfig.Instance.blockingImmuneTime;
-						potentGuardingCooldown = BlockingConfig.Instance.potentGuardingCooldown;
+						OnPotentBlockShield();
 						return false;
 					}
-					else //No Mana to consume.
+					//	No Mana left to Potently Shield Guard.
+					else
 					{
-						if (BlockingConfigClient.Instance.enableSoundsGuardingBlock)
-						{
-							SoundEngine.PlaySound(Block, Player.position);
-						}
-						if (BlockingConfigClient.Instance.enableSoundsGuardingBlockShieldBroken)
-						{
-							SoundEngine.PlaySound(BlockShieldBroken, Player.position);
-						}
-						guardingCooldown = BlockingConfig.Instance.guardingCooldown;
+						Player.velocity.X = 5f * hitDirection;
+						Player.velocity.Y = -3f;
+						OnBlockShield();
 						return true;
 					}
 				}
-				return true; //Keep this here. It must be at the end of the PreHurt Method so that the Player takes damage by default.
+				return true; //	Keep this here. It must be at the end of the PreHurt Method so that the Player takes damage by default.
 			}
 		}
 		
-		//Immune Time and received damage is only after PreHurt, so the Immune Time scripts must be here, in the PostHurt Method. (Using the Hurt Method will not work.)
+		//	Immune Time and received damage is only after PreHurt, so the Immune Time scripts must be here, in the PostHurt Method. (Using the Hurt Method will not work.)
 		public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit, int cooldownCounter)
 		{
-			if (guardTimer >= 1 && !hasShield && parryTimer == 0) //Guarding, but not Parrying and not Shield Guarding.
+			//	Guarding
+			if (guardTimer > 0 && !hasShield && parryTimer == 0)
 			{
 				Player.immune = true;
 				Player.immuneTime = BlockingConfig.Instance.blockingImmuneTime;
 				guardingCooldown = BlockingConfig.Instance.guardingCooldown;
 			}
-			if (guardTimer >= 1 && hasShield && parryTimer == 0) //Shield Guarding, but not Parrying.
+			//	Shield Guarding
+			if (guardTimer > 0 && hasShield && parryTimer == 0)
 			{
 				Player.immune = true;
 				Player.immuneTime = BlockingConfig.Instance.blockingImmuneTime;
@@ -261,7 +240,68 @@ namespace Blocking
 			}
 		}
 		
-		public override void PostUpdate() //Animations
+		public void OnBlock()
+		{
+			if (BlockingConfigClient.Instance.enableSoundsGuardingBlock)
+			{
+				SoundEngine.PlaySound(Block, Player.position);
+			}
+			guardingCooldown = BlockingConfig.Instance.guardingCooldown;
+		}
+		public void OnPotentBlock()
+		{
+			Player.immune = true;
+			Player.immuneTime = BlockingConfig.Instance.blockingImmuneTime;
+			if (BlockingConfigClient.Instance.enableSoundsGuardingBlock)
+			{
+				SoundEngine.PlaySound(Block, Player.position);
+			}
+			guardingCooldown = BlockingConfig.Instance.guardingCooldown;
+		}
+		public void OnBlockShield()
+		{
+			if (BlockingConfigClient.Instance.enableSoundsGuardingBlock)
+			{
+				SoundEngine.PlaySound(Block, Player.position);
+			}
+			if (BlockingConfigClient.Instance.enableSoundsGuardingBlockShieldBroken)
+			{
+				SoundEngine.PlaySound(BlockShieldBroken, Player.position);
+			}
+			guardingCooldown = BlockingConfig.Instance.guardingCooldown;
+		}
+		public void OnPotentBlockShield()
+		{
+			if (BlockingConfigClient.Instance.enableSoundsGuardingBlockShield)
+			{
+				SoundEngine.PlaySound(BlockShield, Player.position);
+			}
+			Player.immune = true;
+			Player.immuneTime = BlockingConfig.Instance.blockingImmuneTime;
+			potentGuardingCooldown = BlockingConfig.Instance.potentGuardingCooldown;
+		}
+		public void OnParry()
+		{
+			if (BlockingConfigClient.Instance.enableSoundsParrying)
+			{
+				SoundEngine.PlaySound(Parry, Player.position);
+			}
+			if (BlockingConfigClient.Instance.enableScreenshakeParrying)
+			{
+				screenShakeTimerParrying += BlockingConfig.Instance.parryTimer;
+			}
+			Player.immune = true;
+			Player.immuneTime = BlockingConfig.Instance.parryImmuneTime;
+			parryCooldown = BlockingConfig.Instance.parryCooldown;
+			if (parryCounterCooldown == 0 && BlockingConfig.Instance.enableParryCounters && parryCounter)
+			{
+				Player.AddBuff(BuffID.ParryDamageBuff, BlockingConfig.Instance.parryCounterTime);
+				parryCounterCooldown = BlockingConfig.Instance.parryCounterCooldown;
+			}
+		}
+		
+		//	Animations
+		public override void PostUpdate()
 		{
 			if (guardTimer >= 1)
 			{
@@ -308,9 +348,9 @@ namespace Blocking
 			}
 		}
 		
-		//Sounds.
-		//Question: Why declare the audio like this?
-		//Answer: A simple step in Code Optimization. If we were to declare this sound many times over in different places, it would get messy very quickly.
+		//	Sounds
+		//	Question: Why declare the audio like this?
+		//	Answer: A simple step in Code Optimization. If we were to declare this sound many times over in different places, it would get messy very quickly.
 		public static readonly SoundStyle GuardRaise = new SoundStyle("Blocking/Sounds/GuardRaise");
 		public static readonly SoundStyle GuardLower = new SoundStyle("Blocking/Sounds/GuardLower");
 		public static readonly SoundStyle GuardBash = new SoundStyle("Blocking/Sounds/GuardBash");
