@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -260,13 +260,9 @@ namespace Blocking
 		}
 		public void OnBlockShield()
 		{
-			if (BlockingConfigClient.Instance.enableSoundsGuardingBlock)
-			{
-				SoundEngine.PlaySound(Block, Player.position);
-			}
 			if (BlockingConfigClient.Instance.enableSoundsGuardingBlockShieldBroken)
 			{
-				SoundEngine.PlaySound(BlockShieldBroken, Player.position);
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.25f, Volume = 1f}, Player.position);
 			}
 			guardingCooldown = BlockingConfig.Instance.guardingCooldown;
 		}
@@ -358,6 +354,5 @@ namespace Blocking
 		public static readonly SoundStyle Parry = new SoundStyle("Blocking/Sounds/Parry");
 		public static readonly SoundStyle Block = new SoundStyle("Blocking/Sounds/Block");
 		public static readonly SoundStyle BlockShield = new SoundStyle("Blocking/Sounds/BlockShield");
-		public static readonly SoundStyle BlockShieldBroken = new SoundStyle("Blocking/Sounds/BlockShieldBroken");
 	}
 }
