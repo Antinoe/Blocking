@@ -57,6 +57,29 @@ namespace Blocking
 			return player.GetModPlayer<BlockingPlayer>();
 		}
 		
+		public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+		{
+			Main.NewText("ModifyHitNPC is being ran.");
+			if (counterDamage > 0)
+			{
+				damage += counterDamage;
+				counterDamage -= damage;
+				Main.NewText("Counter Damage spent.");
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
+			}
+		}
+		public override void ModifyHitPvp(Item item, Player target, ref int damage, ref bool crit)
+		{
+			Main.NewText("ModifyHitPvp is being ran.");
+			if (counterDamage > 0)
+			{
+				damage += counterDamage;
+				counterDamage -= damage;
+				Main.NewText("Counter Damage spent.");
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
+			}
+		}
+		
 		public override void PostUpdateMiscEffects()
 		{
 			//	Guarding

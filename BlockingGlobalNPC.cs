@@ -14,6 +14,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 using Terraria.ModLoader.IO;
 using Terraria.Audio;
+//	This is needed in order to use Blocking's player-specific fields.
 using static Blocking.BlockingPlayer;
 
 namespace Blocking
@@ -67,5 +68,18 @@ namespace Blocking
 			}
 			return true;
 		}
+		//	Won't be using this. Maybe another time..
+		/*public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+		{
+			Main.NewText("ModifyHitByItem is being ran.");
+			BlockingPlayer bp = player.GetModPlayer<BlockingPlayer>();
+			if (bp.counterDamage > 0)
+			{
+				damage += bp.counterDamage;
+				bp.counterDamage -= damage;
+				Main.NewText("Counter Damage spent.");
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, npc.position);
+			}
+		}*/
 	}
 }
