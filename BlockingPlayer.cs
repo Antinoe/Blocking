@@ -36,6 +36,7 @@ namespace Blocking
 		public bool parryCounter = true;
 		public int parryCounterCooldown = 0;
 		public int counterDamage = 0;
+		public int counterDamageReserve = 0;
 		public int screenShakeTimerGuarding = 0;
 		public int screenShakeTimerParryingAttempt = 0;
 		public int screenShakeTimerParrying = 0;
@@ -55,29 +56,6 @@ namespace Blocking
 		public static BlockingPlayer ModPlayer(Player player)
 		{
 			return player.GetModPlayer<BlockingPlayer>();
-		}
-		
-		public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
-		{
-			Main.NewText("ModifyHitNPC is being ran.");
-			if (counterDamage > 0)
-			{
-				damage += counterDamage;
-				counterDamage -= damage;
-				Main.NewText("Counter Damage spent.");
-				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
-			}
-		}
-		public override void ModifyHitPvp(Item item, Player target, ref int damage, ref bool crit)
-		{
-			Main.NewText("ModifyHitPvp is being ran.");
-			if (counterDamage > 0)
-			{
-				damage += counterDamage;
-				counterDamage -= damage;
-				Main.NewText("Counter Damage spent.");
-				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
-			}
 		}
 		
 		public override void PostUpdateMiscEffects()
@@ -178,7 +156,29 @@ namespace Blocking
 			}
 		}
 		
-		//	Right before receiving damage.
+		public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+		{
+			Main.NewText("ModifyHitNPC");
+			if (counterDamage > 0)
+			{
+				damage += counterDamage;
+				counterDamage -= damage;
+				Main.NewText("Counter Damage spent.");
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
+			}
+		}
+		public override void ModifyHitPvp(Item item, Player target, ref int damage, ref bool crit)
+		{
+			Main.NewText("ModifyHitPvp");
+			if (counterDamage > 0)
+			{
+				damage += counterDamage;
+				counterDamage -= damage;
+				Main.NewText("Counter Damage spent.");
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
+			}
+		}
+		
 		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {
 			//	Not sure what bug this fixed, but I'll leave it here anyway.
@@ -188,19 +188,11 @@ namespace Blocking
 			}
 			else
 			{
-				//	Parrying.
-				if (parryTimer > 0)
-				{
-					playSound = false;
-					OnParry();
-					return false; //	The reason we put the return value here, at the end of the Parry Counter code, rather than at the end of the Parry code, is because nothing after a Return statement is run. Therefore, if we had done the aforementioned, the Parry Counter code wouldn't run at all, rendering the ability useless.
-					//	Remember: The placement of return values is very necessary. Always put it at the end of statements.
-				}
-				
 				//	Guarding
 				if (guardTimer > 0)
 				{
-					counterDamage += damage;
+					//counterDamageReserve += damage * (int)BlockingConfig.Instance.blockingPotency;
+					counterDamageReserve += damage;
 					if (!hasShield && parryTimer == 0)
 					{
 						playSound = false;
@@ -246,6 +238,15 @@ namespace Blocking
 						}
 					}
 				}
+				//	Parrying.
+				if (parryTimer > 0)
+				{
+					playSound = false;
+					OnParry();
+					return false; //	The reason we put the return value here, at the end of the Parry Counter code, rather than at the end of the Parry code, is because nothing after a Return statement is run. Therefore, if we had done the aforementioned, the Parry Counter code wouldn't run at all, rendering the ability useless.
+					//	Remember: The placement of return values is very necessary. Always put it at the end of statements.
+				}
+				
 				return true; //	Keep this here. It must be at the end of the PreHurt Method so that the Player takes damage by default.
 			}
 		}

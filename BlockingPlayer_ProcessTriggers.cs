@@ -36,6 +36,13 @@ namespace Blocking
 					}*/
 				}
 			}
+			if (Blocking.RevUp.JustPressed && counterDamageReserve > 0)
+			{
+				SoundEngine.PlaySound(ParryAttempt, Player.position);
+				/*counterDamageReserve *= (int)0.75f;
+				counterDamage += counterDamageReserve * (int)1.25f;*/
+				counterDamage += counterDamageReserve;
+			}
 			if (Blocking.Guard.JustPressed && BlockingConfig.Instance.enableGuarding && guardingCooldown == 0)
 			{
 				if (BlockingConfigClient.Instance.enableSoundsGuardingRaise)
