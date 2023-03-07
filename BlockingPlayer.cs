@@ -35,6 +35,7 @@ namespace Blocking
 		public int parryCooldown = 0;
 		public bool parryCounter = true;
 		public int parryCounterCooldown = 0;
+		public int counterDamage = 0;
 		public int screenShakeTimerGuarding = 0;
 		public int screenShakeTimerParryingAttempt = 0;
 		public int screenShakeTimerParrying = 0;
@@ -50,9 +51,10 @@ namespace Blocking
 			//hasBootBenefits = false; //	Resetting this nullifies the effect completely. :moyai:
 		}
 		
-		public static BlockingPlayer ModPlayer(Player Player)
+		//	I'm not sure if I need this anymore, but I'll keep it for now.
+		public static BlockingPlayer ModPlayer(Player player)
 		{
-			return Player.GetModPlayer<BlockingPlayer>();
+			return player.GetModPlayer<BlockingPlayer>();
 		}
 		
 		public override void PostUpdateMiscEffects()
@@ -173,48 +175,52 @@ namespace Blocking
 				}
 				
 				//	Guarding
-				if (guardTimer >= 1 && !hasShield && parryTimer == 0)
+				if (guardTimer > 0)
 				{
-					playSound = false;
-					//	Potent Guarding
-					if (potentGuarding && canPotentGuard && !BlockingConfig.Instance.potentGuardingRequiresShield && Player.statMana >= damage - Player.statDefense)
+					counterDamage += damage;
+					if (!hasShield && parryTimer == 0)
 					{
-						Player.statMana -= damage - Player.statDefense;
-						Player.velocity.X = 5f * hitDirection;
-						Player.velocity.Y = -3f;
-						OnPotentBlock();
-						return false;
+						playSound = false;
+						//	Potent Guarding
+						if (potentGuarding && canPotentGuard && !BlockingConfig.Instance.potentGuardingRequiresShield && Player.statMana >= damage - Player.statDefense)
+						{
+							Player.statMana -= damage - Player.statDefense;
+							Player.velocity.X = 5f * hitDirection;
+							Player.velocity.Y = -3f;
+							OnPotentBlock();
+							return false;
+						}
+						//	No Mana left for Potent Guarding. Normal Guarding.
+						else
+						{
+							Player.velocity.X = 5f * hitDirection;
+							Player.velocity.Y = -3f;
+							OnBlock();
+							return true;
+						}
 					}
-					//	No Mana left for Potent Guarding. Normal Guarding.
-					else
+					
+					//	Shield Guarding
+					if (hasShield && parryTimer == 0)
 					{
-						Player.velocity.X = 5f * hitDirection;
-						Player.velocity.Y = -3f;
-						OnBlock();
-						return true;
-					}
-				}
-				
-				//	Shield Guarding
-				if (guardTimer >= 1 && hasShield && parryTimer == 0)
-				{
-					playSound = false;
-					//	Potent Shield Guarding.
-					if (potentGuarding && canPotentGuard && Player.statMana >= damage - Player.statDefense)
-					{
-						Player.velocity.X = 5f * hitDirection;
-						Player.velocity.Y = -3f;
-						Player.statMana -= damage - Player.statDefense;
-						OnPotentBlockShield();
-						return false;
-					}
-					//	No Mana left to Potently Shield Guard.
-					else
-					{
-						Player.velocity.X = 5f * hitDirection;
-						Player.velocity.Y = -3f;
-						OnBlockShield();
-						return true;
+						playSound = false;
+						//	Potent Shield Guarding.
+						if (potentGuarding && canPotentGuard && Player.statMana >= damage - Player.statDefense)
+						{
+							Player.velocity.X = 5f * hitDirection;
+							Player.velocity.Y = -3f;
+							Player.statMana -= damage - Player.statDefense;
+							OnPotentBlockShield();
+							return false;
+						}
+						//	No Mana left to Potently Shield Guard.
+						else
+						{
+							Player.velocity.X = 5f * hitDirection;
+							Player.velocity.Y = -3f;
+							OnBlockShield();
+							return true;
+						}
 					}
 				}
 				return true; //	Keep this here. It must be at the end of the PreHurt Method so that the Player takes damage by default.

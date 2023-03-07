@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
@@ -17,6 +18,8 @@ using Terraria.ModLoader.Config;
 using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
+//	This is needed in order to use Blocking's player-specific fields.
+using static Blocking.BlockingPlayer;
 //using System.Reflection; //This is what allows EquipType to be referenced. But that's unneeded in this context, so I won't allow it to exist here.
 
 namespace Blocking
@@ -94,6 +97,20 @@ namespace Blocking
 			if (Item.shieldSlot > -1 && Item.defense > 0)
 			{
 				//Player.velocity.X *= BlockingConfig.Instance.shieldWeight - Item.defense + 0.995f; //Temporary calculation. I will attempt to fix this soon.
+			}
+		}
+		public override void ModifyHitNPC(Item item, Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+		{
+			//	This is *very* necessary for calling upon fields from other classes.
+			BlockingPlayer bp = player.GetModPlayer<BlockingPlayer>();
+			//	The game can't seem to detect the BlockingPlayer hitting an NPC, thus the Counter Damage mechanic doesn't work.
+			//	I've grown tired of working on this for an hour, so I'm just going to push these changes to Github and work on other projects for now.
+			if (bp.counterDamage > 0)
+			{
+				damage += bp.counterDamage;
+				bp.counterDamage -= damage;
+				Main.NewText("Counter Damage spent.");
+				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
 			}
 		}
     }
