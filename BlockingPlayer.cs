@@ -35,8 +35,6 @@ namespace Blocking
 		public int parryCooldown = 0;
 		public bool parryCounter = true;
 		public int parryCounterCooldown = 0;
-		public int counterDamage = 0;
-		public int counterDamageReserve = 0;
 		public int screenShakeTimerGuarding = 0;
 		public int screenShakeTimerParryingAttempt = 0;
 		public int screenShakeTimerParrying = 0;
@@ -156,29 +154,6 @@ namespace Blocking
 			}
 		}
 		
-		public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
-		{
-			Main.NewText("ModifyHitNPC");
-			if (counterDamage > 0)
-			{
-				damage += counterDamage;
-				counterDamage -= damage;
-				Main.NewText("Counter Damage spent.");
-				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
-			}
-		}
-		public override void ModifyHitPvp(Item item, Player target, ref int damage, ref bool crit)
-		{
-			Main.NewText("ModifyHitPvp");
-			if (counterDamage > 0)
-			{
-				damage += counterDamage;
-				counterDamage -= damage;
-				Main.NewText("Counter Damage spent.");
-				SoundEngine.PlaySound(BlockShield with {Pitch = +0.75f, Volume = 1f}, target.position);
-			}
-		}
-		
 		public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {
 			//	Not sure what bug this fixed, but I'll leave it here anyway.
@@ -191,8 +166,6 @@ namespace Blocking
 				//	Guarding
 				if (guardTimer > 0)
 				{
-					//counterDamageReserve += damage * (int)BlockingConfig.Instance.blockingPotency;
-					counterDamageReserve += damage;
 					if (!hasShield && parryTimer == 0)
 					{
 						playSound = false;
