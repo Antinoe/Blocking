@@ -2,3 +2,6 @@ displayName = Blocking (Guarding, Parrying and Reworked Shields)
 author =  Antinous
 version = 1.6.7
 homepage = https://github.com/Antinoe/Blocking
+hideCode = false
+hideResources = false
+includeSource = true
