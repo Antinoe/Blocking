@@ -13,7 +13,6 @@ namespace Blocking
 		public static ModKeybind TogglePotentGuard;
 		public static ModKeybind ToggleParryCounter;
 		public static ModKeybind Parry;
-		public static ModKeybind RevUp;
 		
         public override void Load()
         {
@@ -22,7 +21,6 @@ namespace Blocking
             TogglePotentGuard = KeybindLoader.RegisterKeybind(this, "Toggle Potent Guarding", "Mouse3");
             ToggleParryCounter = KeybindLoader.RegisterKeybind(this, "Toggle Parry Counter", "Mouse3");
             Parry = KeybindLoader.RegisterKeybind(this, "Parry", "LeftAlt");
-            RevUp = KeybindLoader.RegisterKeybind(this, "Rev Up", "OpenTilde");
         }
         
         public override void Unload()
@@ -32,7 +30,6 @@ namespace Blocking
 			TogglePotentGuard = null;
 			ToggleParryCounter = null;
             Parry = null;
-            RevUp = null;
         }
     }
 }
